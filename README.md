@@ -4,7 +4,8 @@ This is a Reactjs project that takes a productID parameter from the user and que
 
 - First you need to have Nodejs and NPM installed in your system. These can be downloaded from https://nodejs.org/en/download/
 
-- Next step is the pull the code from github. This can be done by typing 'git pull' in the terminal
+- Next step is the pull the code from github. This can be done by adding this repository as upstream by typing 'git remote add upstream 
+<address of the repo> followed by a 'git pull'. The other way is to download a zip of the codebase. 
 
 - Next step is to navigate to the project directory and type 'npm intall axios bootstrap --save' to install the dependecies.
 
