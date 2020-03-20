@@ -1,12 +1,13 @@
 // Library to send API get requests
 import axios from "axios";
 import RAPID_API from "./API_keys";
+import TARGET_API_URL from './TargetAPI'
 
 // Calls the target API for product info
 const manageGetRequest = key => {
   axios
     .get(
-      "https://redsky.target.com/v2/pdp/tcin/13860428?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics"
+      TARGET_API_URL
     )
     .then(res => {
       const newEntry = {
