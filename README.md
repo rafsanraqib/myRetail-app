@@ -4,22 +4,30 @@ This is a Reactjs project that takes a productID parameter from the user and que
 
 - First you need to have Nodejs and NPM installed in your system. These can be downloaded from https://nodejs.org/en/download/
 
-- Next step is the pull the code from github. This can be done by adding this repository as upstream by typing 'git remote add upstream 
-<address of the repo> followed by a 'git pull'. The other way is to download a zip of the codebase. 
+- Next step is the pull the code from github. This can be done by adding this repository as upstream by typing 'git remote add upstream
+
+  <address of the repo> followed by a 'git pull'. The other way is to download a zip of the codebase from github.
 
 - Next step is to navigate to the project directory and type 'npm intall axios bootstrap --save' to install the dependecies.
 
 - Final step is to type 'npm start' to initiate the application.
 
-## Testing
+## Testing the HTTP GET REQUEST
 
 - First start the application by following the steps above and then type in a productID in the textfield of the application interface.
 
-- Click the look up button
+- Click the 'look up' button
 
 - Open the console the web browser. This can be done by right clicking on the browser body and clicking 'inspect element'
 
 - The console will print the result in JSON format.
+
+## Testing the HTTP PUT REQUEST
+
+- Start the application
+- Type in the productID and the new price.
+- Press the 'update' button
+- This will console log the updated record.
 
 ## Available Scripts
 

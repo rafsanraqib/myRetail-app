@@ -3,7 +3,7 @@ import axios from "axios";
 import RAPID_API from "./API_keys";
 
 // Calls the target API for product info
-const manageRequest = key => {
+const manageGetRequest = key => {
   axios
     .get(
       "https://redsky.target.com/v2/pdp/tcin/13860428?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics"
@@ -21,13 +21,14 @@ const manageRequest = key => {
 
         // Gets product price from external API
 
-        getProductPrice(fetch_url_formatted, newEntry);
+        getProductPrice(fetch_url_formatted,0,newEntry);
         return;
       }
       console.log("no items matched");
     });
 };
 
+// Formats the URL to query the product price API
 const formatFetchUrl = product_key => {
   var url = "https://feeditem-target.p.rapidapi.com/itemID/";
   var p_id_string = product_key.toString();
@@ -35,7 +36,10 @@ const formatFetchUrl = product_key => {
   return url;
 };
 
-const getProductPrice = (api_url, dataStore) => {
+// Gets the price of the product. sign parameter indicate type of request
+// sign != 0 means user inititiated put request. sign = 0 means get request
+// Have an enumerator or array with more options like delete, post requests.
+const getProductPrice = (api_url,sign,dataStore) => {
   fetch(api_url, {
     method: "GET",
     headers: {
@@ -45,6 +49,10 @@ const getProductPrice = (api_url, dataStore) => {
   })
     .then(response => response.json())
     .then(data => {
+      if(sign != 0){
+        executePutRequest(api_url, data);
+        return;
+      }
       // Merges the two records into one
 
       mergeTwoDataPoints(data.Item.CurrentPrice.Value, dataStore);
@@ -54,6 +62,7 @@ const getProductPrice = (api_url, dataStore) => {
     });
 };
 
+// Joins the product info record with the product price record.
 const mergeTwoDataPoints = (price_data, product_data) => {
   // New price object creation
 
@@ -69,4 +78,24 @@ const mergeTwoDataPoints = (price_data, product_data) => {
   console.log(ret_string);
 };
 
-export default manageRequest;
+let new_price = 0;
+// Initiates PUT request by formatting the URL.
+// Calls getProductPrice() with sign=1 parameter to indicate PUT request
+const managePutRequest = (product_id, new_price_data) => {
+  new_price = new_price_data;
+  var format_url = formatFetchUrl(product_id);
+  getProductPrice(format_url, 1);
+}
+
+// Executes PUT request
+// Incomplete at this moment
+// Only creates the record that is to be updated in the external API
+const executePutRequest = (api_url_,price_data) =>{
+
+  price_data.Item.CurrentPrice.Value = new_price;
+  console.log(price_data);
+};
+
+// Export methods as an array. 
+const methods = {managePutRequest, manageGetRequest};
+export default methods;

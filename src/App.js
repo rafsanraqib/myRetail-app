@@ -2,6 +2,7 @@
 
 import React from "react";
 import TextBox from "./Components/TextBox";
+import UpdatePrice from './Components/UpdatePrice';
 import "./App.css";
 
 function App() {
@@ -9,6 +10,10 @@ function App() {
     <div className="container">
       <div className="container">
         <TextBox></TextBox>
+      </div>
+      <br></br>
+      <div className = "container">
+        <UpdatePrice></UpdatePrice>
       </div>
     </div>
   );

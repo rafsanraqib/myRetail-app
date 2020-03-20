@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
-import manageRequest from "../Backend/server.js";
+import methods from "../Backend/server.js";
 
 class TextField extends Component {
   state = { product_key: "", data: [] };
@@ -13,7 +13,7 @@ class TextField extends Component {
   sendRequest = key => {
     // Backend method call
 
-    manageRequest(key);
+    methods.manageGetRequest(key);
   };
 
   render() {
